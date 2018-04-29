@@ -1,6 +1,6 @@
-
 import axios from 'axios'
 import {getRedirectPath} from '../util'
+
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const LOGIN_SUCESS = 'LOGIN_SUCESS'
 const ERROR_MSG = 'ERROR_MSG'
@@ -57,8 +57,6 @@ export function login({user,pwd}){
 				}
 			})		
 	}
-
-
 }
 
 export function regisger({user,pwd,repeatpwd,type}){
@@ -78,7 +76,6 @@ export function regisger({user,pwd,repeatpwd,type}){
 				}
 			})		
 	}
-
 }
 
 
