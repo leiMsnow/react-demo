@@ -6,15 +6,17 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import reducers from './reducer'
 import './config'
+import './index.css'
 
 import AuthRoute from './component/authroute'
-import Navbar from './component/navbar'
 import NotFound from './component/404'
 
+import Home from './container/home'
 import Login from './container/login'
 import Register from './container/register'
 import BossInfo from './container/bossinfo'
 import GeniusInfo from './container/geniusinfo'
+
 
 const store = createStore(reducers, compose(
     applyMiddleware(thunk),
@@ -27,11 +29,11 @@ ReactDOM.render(
             <div>
                 <AuthRoute />
                 <Switch>
-                    <Route path='/home' component={Navbar} />
                     <Route path='/login' component={Login} />
                     <Route path='/register' component={Register} />
                     <Route path='/bossInfo' component={BossInfo} />
                     <Route path='/geniusInfo' component={GeniusInfo} />
+                    <Route component={Home} />
                     <Route component={NotFound} />
                 </Switch>
             </div>
