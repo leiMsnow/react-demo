@@ -7,6 +7,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import reducers from './reducer'
 import './config'
 
+import Home from './container/home/home'
 import Login from './container/login/login'
 import Register from './container/register/register'
 import AuthRoute from './component/authroute/authroute'
@@ -21,6 +22,7 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <AuthRoute></AuthRoute>
+                <Route path='/home'  component={Home} />
                 <Route path='/login' component={Login} />
                 <Route path='/register' component={Register} />
             </div>

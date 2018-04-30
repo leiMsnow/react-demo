@@ -21,7 +21,7 @@ export function user(state=initState, action){
 		case LOGIN_SUCESS:
 			return {...state, msg:'',redirectTo:getRedirectPath(action.payload),isAuth:true,...action.payload}
 		case LOAD_DATA:
-			return {...state, ...action.payload}
+			return {...state, ...action.payload, isAuth:true}
 		case ERROR_MSG:
 			return {...state, isAuth:false, msg:action.msg}
 		default:
@@ -42,9 +42,8 @@ function errorMsg(msg){
 	return { msg, type:ERROR_MSG }
 }
 
-export function loadData(userinfo){
-	console.log(loadData)
-	return { type:LOAD_DATA, payload:userinfo}
+export function loadData(userInfo){
+	return { type:LOAD_DATA, payload:userInfo}
 }
 
 export function login({user,pwd}){
@@ -55,7 +54,7 @@ export function login({user,pwd}){
 		axios.post('/user/login',{user,pwd})
 			.then(res=>{
 				if (res.status===200&&res.data.code===0) {
-					dispatch(loginSuccess(res.data.data))
+					dispatch(loginSuccess(res.data.userInfo))
 				}else{
 					dispatch(errorMsg(res.data.msg))
 				}
