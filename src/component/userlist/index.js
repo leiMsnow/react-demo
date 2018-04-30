@@ -16,7 +16,7 @@ export default class UserList extends React.Component{
                                 <Card.Header
                                     title={v.user}
                                     extra={v.title}
-                                    thumb={require(`../component/avatar-selector/images/${v.avatar}.png`)}
+                                    thumb={require(`../avatar-selector/images/${v.avatar}.png`)}
                                 >
                                 </Card.Header>
                                 <Card.Body>
