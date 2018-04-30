@@ -7,7 +7,6 @@ axios.interceptors.request.use((config) => {
 })
 
 axios.interceptors.response.use((config) => {
-    console.log('config', config)
     Toast.hide()
     return config
 })

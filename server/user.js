@@ -5,7 +5,7 @@ const User = model.getModel('user')
 
 Router.get('/list', (req, res)=>{
     User.find({},(err,data)=>{
-        return res.json(data)
+        return res.json(data) 
     })
 })
 
@@ -18,7 +18,7 @@ Router.post('/register',(req, res)=>{
             })
         }
         User.create({user, pwd, type }, (err, data)=>{
-            if(e){
+            if(err){
                 return res.json({
                     code:1, msg:'服务端异常'
                 })
