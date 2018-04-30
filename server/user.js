@@ -9,7 +9,7 @@ const _filter = {pwd:0,__v:0}
 
 Router.get('/list', (req, res)=>{
     // User.remove({},(err,data)=>{ console.log('remvoe all success')})
-    User.find({},(err,data)=>{
+    User.find({},_filter,(err,data)=>{
         return res.json(data) 
     })
 })
