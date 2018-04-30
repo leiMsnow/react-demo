@@ -16,7 +16,9 @@ class AuthRoute extends React.Component{
 			if(res.status===200 && res.data.code === 0){
                 this.props.loadData(res.data.userInfo)
                 this.needLogin()
-			}
+			}else{
+                this.needLogin()
+            }
 		})
     }
 
@@ -28,12 +30,12 @@ class AuthRoute extends React.Component{
         const publicList = ['/login', '/register']
         const { pathname } = this.props.location
         if(publicList.indexOf(pathname)>-1){
-            if(this.props.isAuth){
+            if(this.props._id){
                 this.props.history.push('/home')
             }
             return 
         }
-        if(!this.props.isAuth){
+        if(!this.props._id){
             this.props.history.push('/login')
         }
     }

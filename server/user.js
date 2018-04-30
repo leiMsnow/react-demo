@@ -28,7 +28,15 @@ Router.post('/register',(req, res)=>{
                     code:1, msg:'服务端异常'
                 })
             }
-            return res.json({code:0, msg:'注册成功'})
+            res.cookie('userId', data._id)
+            return res.json({
+                code:0, 
+                userInfo:{
+                    user:data.user,
+                    type:data.type,
+                    _id:data._id,
+                }
+            })
         })
     })
 })
@@ -63,6 +71,32 @@ Router.get('/info', (req, res)=>{
             })
         }
         return res.json({ code:1 })
+    })
+})
+
+Router.post('/update',(req, res)=>{
+    const {userId} = req.cookies
+    if(!userId){
+        return res.json({
+            code:1
+        })
+    }
+    const body = req.body
+    User.findByIdAndUpdate({_id:userId}, body, (err, data)=>{
+        if(data){
+            const userInfo = Object.assign({}, {
+                user: data.user,
+                type: data.type
+            },body)
+            return res.json({
+                code:0,
+                userInfo
+            })
+        }
+        return res.json({
+            code:1,
+            msg:'更新失败'
+        })
     })
 })
 
