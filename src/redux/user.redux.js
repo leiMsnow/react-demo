@@ -3,6 +3,7 @@ import { Toast } from 'antd-mobile'
 import {getRedirectPath} from '../util'
 
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
+const USER_LIST_SUCCESS = 'USER_LIST_SUCCESS'
 const ERROR_MSG = 'ERROR_MSG'
 const LOAD_DATA = 'LOAD_DATA'
 
@@ -10,7 +11,8 @@ const initState = {
 	redirectTo:'',
 	msg:'',
 	user:'',
-	type:''
+	type:'',
+	userList:[],
 }
 
 export function user(state=initState, action){
@@ -18,7 +20,9 @@ export function user(state=initState, action){
 		case AUTH_SUCCESS:
 			return {...state, msg:'', redirectTo:getRedirectPath(action.payload), ...action.payload}
 		case LOAD_DATA:
-			return {...state, msg:'', ...action.payload}
+			return {...state, ...action.payload}
+		case USER_LIST_SUCCESS:
+			return {...state, ...action.payload}
 		case ERROR_MSG:
 			return {...state, msg:action.msg}
 		default:
@@ -28,6 +32,10 @@ export function user(state=initState, action){
 
 function authSuccess(data){
 	return { type:AUTH_SUCCESS , payload:data}
+}
+
+function userListSuccess(data){
+	return { type:USER_LIST_SUCCESS , payload:data}
 }
 
 function errorMsg(msg){
@@ -87,5 +95,17 @@ export function update({company, title, desc, money,avatar}){
 	}
 }
 
+export function getList(type){
+	return dispatch=>{
+		axios.get(`/user/list?type=${type}`)
+			.then(res=>{
+				if (res.status===200&&res.data.code===0) {
+					dispatch(userListSuccess(res.data))
+				}else{
+					dispatch(errorMsg(res.data.msg))
+				}
+			})
+	}
+}
 
 
