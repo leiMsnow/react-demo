@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import reducers from './reducer'
 import './config'
 
-import AuthRoute from './component/authroute/authroute'
+import AuthRoute from './component/authroute'
+import Tabbar from './component/tabbar'
+import NotFound from './component/404'
 
-import Home from './container/home/home'
-import Login from './container/login/login'
-import Register from './container/register/register'
-import BossInfo from './container/bossinfo/bossinfo'
-import GeniusInfo from './container/geniusinfo/geniusinfo'
+import Home from './container/home'
+import Login from './container/login'
+import Register from './container/register'
+import BossInfo from './container/bossinfo'
+import GeniusInfo from './container/geniusinfo'
 
 const store = createStore(reducers, compose(
     applyMiddleware(thunk),
@@ -24,12 +26,15 @@ ReactDOM.render(
     (<Provider store={store}>
         <BrowserRouter>
             <div>
-                <AuthRoute></AuthRoute>
-                <Route path='/home'  component={Home} />
-                <Route path='/login' component={Login} />
-                <Route path='/register' component={Register} />
-                <Route path='/bossInfo' component={BossInfo} />
-                <Route path='/geniusInfo' component={GeniusInfo} />
+                <AuthRoute />
+                <Switch>
+                    <Route path='/home'  component={Home} />
+                    <Route path='/login' component={Login} />
+                    <Route path='/register' component={Register} />
+                    <Route path='/bossInfo' component={BossInfo} />
+                    <Route path='/geniusInfo' component={GeniusInfo} />
+                    <Route component={NotFound} />
+                </Switch>
             </div>
         </BrowserRouter>
     </Provider>),

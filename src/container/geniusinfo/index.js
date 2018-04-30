@@ -4,20 +4,18 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { update } from '../../redux/user.redux'
-import AvatarSelector from '../../component/avatar-selector/avatar-selector'
+import AvatarSelector from '../../component/avatar-selector'
 
 @connect(
     state => state.user,
     { update }
 )
-class BossInfo extends React.Component{
+class GeniusInfo extends React.Component{
 
     constructor(props){
         super(props)
         this.state = {
-            company:'',
             title:'',
-            money:'',
             desc:'',
             avatar:''
         }
@@ -35,13 +33,11 @@ class BossInfo extends React.Component{
                             <Button key='submit' type='primary' onClick={()=>this.updateInfo()}>提交</Button>
                         ]
                     }
-                >BossInfo</NavBar>
+                >GeniusInfo</NavBar>
                 <AvatarSelector selected={(v)=> this.handleState('avatar',v) }/>
-                <InputItem onChange={(v)=>{this.handleState('company',v)}}>公司名称 </InputItem>
-                <InputItem onChange={(v)=>{this.handleState('title',v)}}>招聘岗位 </InputItem>
-                <InputItem onChange={(v)=>{this.handleState('money',v)}}>薪资待遇 </InputItem>
+                <InputItem onChange={(v)=>{this.handleState('title',v)}}>求职岗位 </InputItem>
                 <TextareaItem
-                    title='职位描述'
+                    title='简历描述'
                     rows={3}
                     autoHeight
                     onChange={(v)=>{this.handleState('desc',v)}} />
@@ -60,4 +56,4 @@ class BossInfo extends React.Component{
     }
 }
 
-export default BossInfo
+export default GeniusInfo

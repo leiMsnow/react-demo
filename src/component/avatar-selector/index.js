@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes  from 'prop-types'
+
 import { Grid, List } from 'antd-mobile'
 
 const avatars = 'boy,bull,chick,crab,girl,hedgehog,hippopotamus,koala,lemur,man,pig,tiger,whale,woman,zebra'
@@ -40,6 +42,10 @@ class AvatarSelector extends React.Component{
             </List>
         )
     }
+}
+
+AvatarSelector.propTypes = {
+    selected:PropTypes.func.isRequired
 }
 
 export default AvatarSelector
