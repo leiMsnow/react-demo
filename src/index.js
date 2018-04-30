@@ -8,10 +8,9 @@ import reducers from './reducer'
 import './config'
 
 import AuthRoute from './component/authroute'
-import Tabbar from './component/tabbar'
+import Navbar from './component/navbar'
 import NotFound from './component/404'
 
-import Home from './container/home'
 import Login from './container/login'
 import Register from './container/register'
 import BossInfo from './container/bossinfo'
@@ -28,7 +27,7 @@ ReactDOM.render(
             <div>
                 <AuthRoute />
                 <Switch>
-                    <Route path='/home'  component={Home} />
+                    <Route path='/home' component={Navbar} />
                     <Route path='/login' component={Login} />
                     <Route path='/register' component={Register} />
                     <Route path='/bossInfo' component={BossInfo} />
