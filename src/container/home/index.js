@@ -10,7 +10,7 @@ import Message from './message'
 import UserCenter from './user'
 
 @connect(
-    state => state,
+    state => state
 )
 class Home extends React.Component{
 
@@ -21,23 +21,23 @@ class Home extends React.Component{
             {
                 path:'/genius',
                 text:'Boss',
-                icon:'boss',
+                icon:'job',
                 title:'Boss列表',
-                component:Boss,
+                component:Genius,
                 hide:user.type === 'boss'
             },
             {
                 path:'/boss',
                 text:'牛人',
-                icon:'job',
+                icon:'boss',
                 title:'牛人列表',
-                component:Genius,
+                component:Boss,
                 hide:user.type === 'genius'
             },
             {
                 path:'/message',
                 text:'消息',
-                icon:'job',
+                icon:'message',
                 title:'消息列表',
                 component:Message,
                 hide:false
@@ -54,21 +54,17 @@ class Home extends React.Component{
         const title = navList.find(v=>v.path===pathname)?navList.find(v=>v.path===pathname).title:''
         return (
             <div>
-                <NavBar 
-                    mode='dark'
-                >
-                    {title}
-                </NavBar>
-                {
-                    navList.map(v=>(
-                        <Switch key={v.path}>
-                            <Route path={v.path} component={v.component}/>
-                        </Switch>
-                    ))
-                }
-                <Tabbar 
-                data={navList}
-                />
+                <NavBar mode='dark'>{title}</NavBar>
+                <div>
+                    <Switch>
+                    {
+                        navList.map(v=>(
+                                <Route key={v.path} path={v.path} component={v.component}/>
+                        ))
+                    }
+                    </Switch>
+                </div>
+                <Tabbar data={navList} />
             </div>
         )
     }

@@ -10,9 +10,9 @@ export default class UserList extends React.Component{
             <WingBlank>
                 {
                     data.map((v)=>(
-                        <div>
+                        <div key={v._id}>
                             <WhiteSpace />
-                            <Card key={v._id}>
+                            <Card >
                                 <Card.Header
                                     title={v.user}
                                     extra={ (v.type === 'boss'?'招聘: ':'')+ v.title}

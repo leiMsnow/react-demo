@@ -11,7 +11,7 @@ import UserList from '../../../component/userlist'
 export default class Boss extends React.Component{
 
     componentDidMount(){
-        this.props.getList('boss')
+        this.props.getList('genius')
     }
 
     render(){
