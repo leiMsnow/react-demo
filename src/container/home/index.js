@@ -19,7 +19,7 @@ class Home extends React.Component{
         const {pathname} = this.props.location
         const navList = [
             {
-                path:'/boss',
+                path:'/genius',
                 text:'Boss',
                 icon:'boss',
                 title:'Boss列表',
@@ -27,7 +27,7 @@ class Home extends React.Component{
                 hide:user.type === 'boss'
             },
             {
-                path:'/genius',
+                path:'/boss',
                 text:'牛人',
                 icon:'job',
                 title:'牛人列表',

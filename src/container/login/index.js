@@ -25,7 +25,6 @@ class Login extends React.Component {
             <div>
                 { this.props.redirectTo? <Redirect to={this.props.redirectTo} />:null}
                 <Logo/>
-                <h2>Login</h2>
                 <WingBlank>
                     <List>
                         <InputItem onChange={(v)=>{

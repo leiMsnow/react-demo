@@ -5,8 +5,6 @@ export function getRedirectPath({type, avatar}){
 	let url = `/${type}`
 	if (!avatar) {
 		url += 'Info'
-	}else{
-		url = '/userCenter'
 	}
 	return url
 }

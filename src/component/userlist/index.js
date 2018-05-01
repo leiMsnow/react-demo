@@ -15,15 +15,21 @@ export default class UserList extends React.Component{
                             <Card key={v._id}>
                                 <Card.Header
                                     title={v.user}
-                                    extra={v.title}
+                                    extra={ (v.type === 'boss'?'招聘: ':'')+ v.title}
                                     thumb={require(`../avatar-selector/images/${v.avatar}.png`)}
-                                >
-                                </Card.Header>
+                                />
                                 <Card.Body>
                                     {v.desc.split('\n').map(sv=>(
                                         <div key={sv}>{sv}</div>
                                     ))}
                                 </Card.Body>
+                                {
+                                    v.type === 'boss'?
+                                    <Card.Footer
+                                        content={`公司: ${v.company}`}
+                                        extra={`薪资: ${v.money}`}
+                                    />:null
+                                }
                             </Card>
                         </div>
                     ))
