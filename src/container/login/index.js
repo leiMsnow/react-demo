@@ -1,40 +1,40 @@
 import React from 'react'
 import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
-import { login } from '../../redux/user.redux'
 import { Redirect } from 'react-router-dom'
 
+import warpperState from '../../component/warpper-state'
+import { login } from '../../redux/user.redux'
 import Logo from '../../component/logo'
 
 @connect(
     state => state.user,
     { login }
 )
+@warpperState
 class Login extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state = {
-            user:'',
-            pwd:''
-        }
     }
 
     render() {
         return (
             <div>
-                { this.props.redirectTo&& this.props.redirectTo!=='/login'? <Redirect to={this.props.redirectTo} />:null}
-                <Logo/>
+                {this.props.redirectTo && this.props.redirectTo !== '/login' ? <Redirect to={this.props.redirectTo} /> : null}
+                <Logo />
                 <WingBlank>
                     <List>
-                        <InputItem onChange={(v)=>{
-                            this.handleState('user',v)
+                        <InputItem onChange={(v) => {
+                            this.props.handleState('user', v)
                         }}>帐号</InputItem>
                         <WhiteSpace />
-                        <InputItem type='password' onChange={(v)=>{
-                            this.handleState('pwd',v)
+                        <InputItem type='password' onChange={(v) => {
+                            this.props.handleState('pwd', v)
                         }}>密码</InputItem>
                     </List>
+                    <WhiteSpace />
+                    <WhiteSpace />
                     <Button onClick={this.login} type='primary'>登录</Button>
                     <WhiteSpace />
                     <Button onClick={this.register} type='primary'>注册</Button>
@@ -43,18 +43,11 @@ class Login extends React.Component {
         )
     }
 
-    handleState=(key, value)=>{
-        this.setState({
-            [key]:value
-        })
+    login = () => {
+        this.props.login(this.props.state)
     }
 
-    login=()=>{
-        console.log(this.state)
-        this.props.login(this.state)
-    }
-
-    register = () =>{
+    register = () => {
         this.props.history.push('/register')
     }
 }

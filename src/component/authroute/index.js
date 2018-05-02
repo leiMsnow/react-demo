@@ -6,36 +6,36 @@ import { loadData } from '../../redux/user.redux'
 
 @withRouter
 @connect(
-    state=>state.user,
+    state => state.user,
     { loadData }
 )
-class AuthRoute extends React.Component{
+class AuthRoute extends React.Component {
 
-    componentDidMount(){
-        axios.get('/user/info').then(res=>{
-			if(res.status===200 && res.data.code === 0){
+    componentDidMount() {
+        axios.get('/user/info').then(res => {
+            if (res.status === 200 && res.data.code === 0) {
                 this.props.loadData(res.data.userInfo)
                 this.needLogin()
-			}else{
+            } else {
                 this.needLogin()
             }
-		})
+        })
     }
 
-    render(){
+    render() {
         return null
     }
 
-    needLogin=()=>{
+    needLogin = () => {
         const publicList = ['/login', '/register']
         const { pathname } = this.props.location
-        if(publicList.indexOf(pathname)>-1){
-            if(this.props._id){
+        if (publicList.indexOf(pathname) > -1) {
+            if (this.props._id) {
                 this.props.history.push('/home')
             }
-            return 
+            return
         }
-        if(!this.props._id){
+        if (!this.props._id) {
             this.props.history.push('/login')
         }
     }
