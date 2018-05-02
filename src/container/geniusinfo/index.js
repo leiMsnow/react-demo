@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { update } from '../../redux/user.redux'
-import AvatarSelector from '../../component/avatar-selector'
+import { AvatarSelector} from '../../component'
 
 @connect(
     state => state.user,

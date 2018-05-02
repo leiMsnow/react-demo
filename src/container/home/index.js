@@ -3,7 +3,7 @@ import { NavBar } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { Switch, Route, withRouter } from 'react-router-dom'
 
-import Tabbar from '../../component/tabbar'
+import { Tabbar } from '../../component'
 import Boss from './boss'
 import Genius from './genius'
 import Message from './message'

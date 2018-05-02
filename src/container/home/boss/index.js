@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { getList } from '../../../redux/user.redux'
-import UserList from '../../../component/userlist'
+import { UserList} from '../../../component'
 
 @connect(
     state => state.user,

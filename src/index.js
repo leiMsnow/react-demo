@@ -8,8 +8,7 @@ import reducers from './reducer'
 import './config'
 import './index.css'
 
-import AuthRoute from './component/authroute'
-import NotFound from './component/404'
+import { AuthRoute } from './component'
 
 import Home from './container/home'
 import Login from './container/login'
@@ -19,7 +18,7 @@ import GeniusInfo from './container/geniusinfo'
 
 const store = createStore(reducers, compose(
     applyMiddleware(thunk),
-    window.devToolsExtension? window.devToolsExtension():f=>f
+    window.devToolsExtension ? window.devToolsExtension() : f => f
 ))
 
 ReactDOM.render(
@@ -32,11 +31,11 @@ ReactDOM.render(
                     <Route path='/register' component={Register} />
                     <Route path='/bossInfo' component={BossInfo} />
                     <Route path='/geniusInfo' component={GeniusInfo} />
+                    <Route path='/chat/:user' component={GeniusInfo} />
                     <Route component={Home} />
-                    <Route component={NotFound} />
                 </Switch>
             </div>
         </BrowserRouter>
     </Provider>),
-	document.getElementById('root')
+    document.getElementById('root')
 )

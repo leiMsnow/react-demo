@@ -4,9 +4,8 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 
-
 @withRouter
-class Tabbar extends React.Component {
+export default class Tabbar extends React.Component {
 
     render() {
         const { pathname } = this.props.location
@@ -34,4 +33,3 @@ class Tabbar extends React.Component {
 Tabbar.propTypes = {
     data: PropTypes.array.isRequired,
 }
-export default Tabbar

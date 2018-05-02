@@ -3,15 +3,14 @@ import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import warpperState from '../../component/warpper-state'
+import { WarpperState, Logo } from '../../component'
 import { login } from '../../redux/user.redux'
-import Logo from '../../component/logo'
 
 @connect(
     state => state.user,
     { login }
 )
-@warpperState
+@WarpperState
 class Login extends React.Component {
 
     constructor(props) {
