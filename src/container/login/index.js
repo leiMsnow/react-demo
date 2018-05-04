@@ -12,11 +12,6 @@ import { login } from '../../redux/user.redux'
 )
 @WarpperState
 class Login extends React.Component {
-
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <div>

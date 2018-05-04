@@ -5,7 +5,7 @@ import cookies from 'browser-cookies'
 import { Redirect } from 'react-router-dom'
 
 import { logout } from '../../../redux/user.redux'
-
+import { constant } from '../../../utils'
 @connect(
     state => state,
     { logout }
@@ -22,7 +22,7 @@ class UserCenter extends React.Component {
                     message={user.company}
                 />
 
-                <List renderHeader={user.type === 'boss' ? '招聘信息' : '简介'}>
+                <List renderHeader={user.type === constant.userType.boss ? '招聘信息' : '简介'}>
                     <List.Item>
                         {user.title}
                         {
@@ -33,7 +33,7 @@ class UserCenter extends React.Component {
                             ))
                         }
                         {
-                            user.type === 'boss' ?
+                            user.type === constant.userType.boss ?
                                 <List.Item.Brief>
                                     薪资待遇: {user.money}
                                 </List.Item.Brief> : null

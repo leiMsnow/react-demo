@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { Switch, Route, withRouter } from 'react-router-dom'
 
 import { Tabbar } from '../../component'
+import { constant } from '../../utils'
+
 import Boss from './boss'
 import Genius from './genius'
 import Message from './message'
@@ -32,7 +34,7 @@ class Home extends React.Component {
                 icon: 'job',
                 title: 'Boss列表',
                 component: Genius,
-                hide: user.type === 'boss'
+                hide: user.type === constant.userType.boss
             },
             {
                 path: '/boss',
@@ -40,7 +42,7 @@ class Home extends React.Component {
                 icon: 'boss',
                 title: '牛人列表',
                 component: Boss,
-                hide: user.type === 'genius'
+                hide: user.type === constant.userType.genius
             },
             {
                 path: '/message',

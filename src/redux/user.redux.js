@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Toast } from 'antd-mobile'
-import { getRedirectPath } from '../util'
+import { getRedirectPath } from '../utils'
 
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
 const USER_LIST_SUCCESS = 'USER_LIST_SUCCESS'

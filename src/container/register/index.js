@@ -5,7 +5,7 @@ import { register } from '../../redux/user.redux'
 import { Redirect } from 'react-router-dom'
 
 import { Logo } from '../../component'
-
+import { constant } from '../../utils'
 @connect(
     state => state.user,
     {
@@ -34,13 +34,13 @@ class Register extends React.Component {
                         <InputItem onChange={(v) => this.handleChange('user', v)}>帐号</InputItem>
                         <WhiteSpace />
                         <InputItem type='password' onChange={(v) => this.handleChange('pwd', v)}>密码</InputItem>
-                        <RadioItem checked={this.state.type === 'genius'}
-                            onChange={() => this.handleChange('type', 'genius')}
+                        <RadioItem checked={this.state.type === constant.userType.boss}
+                            onChange={() => this.handleChange('type', constant.userType.genius)}
                         >
                             天才
                         </RadioItem>
-                        <RadioItem checked={this.state.type === 'boss'}
-                            onChange={() => this.handleChange('type', 'boss')}
+                        <RadioItem checked={this.state.type === constant.userType.boss}
+                            onChange={() => this.handleChange('type', constant.userType.boss)}
                         >
                             Boss
                         </RadioItem>
