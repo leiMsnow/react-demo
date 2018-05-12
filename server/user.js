@@ -7,7 +7,6 @@ const User = model.getModel('user')
 const Chat = model.getModel('chat')
 
 const _filter = { pwd: 0, __v: 0 }
-const _chat_filter = { _id: 0, __v: 0 }
 
 Router.get('/list', (req, res) => {
     // User.remove({},(err,data)=>{ console.log('remvoe all user success')})
@@ -111,7 +110,7 @@ Router.get('/getMessageList', (req, res) => {
     // Chat.remove({}, (err, data) => { console.log('remvoe all chat message success') })
     const user = req.cookies.user
     const where = { '$or': [{ from: user, to: user }] }
-    Chat.find({}, _chat_filter, (err, data) => {
+    Chat.find({}, _filter, (err, data) => {
         if (!err) {
             return res.json({
                 code: 0,

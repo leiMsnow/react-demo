@@ -27,7 +27,7 @@ class Chat extends React.Component {
                 {
                     this.props.chat.chatMessage.map(message => {
                         return (
-                            <p key={message.chat_id}>
+                            <p key={message._id}>
                                 {message.content}
                             </p>
                         )
