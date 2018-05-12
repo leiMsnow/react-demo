@@ -4,24 +4,14 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { update } from '../../redux/user.redux'
-import { AvatarSelector } from '../../component'
+import { AvatarSelector, WarpperState } from '../../component'
 
 @connect(
     state => state.user,
     { update }
 )
+@WarpperState
 class BossInfo extends React.Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            company: '',
-            title: '',
-            money: '',
-            desc: '',
-            avatar: ''
-        }
-    }
 
     render() {
         const { pathname } = this.props.location
@@ -36,27 +26,21 @@ class BossInfo extends React.Component {
                         ]
                     }
                 >BossInfo</NavBar>
-                <AvatarSelector selected={(v) => this.handleState('avatar', v)} />
-                <InputItem onChange={(v) => { this.handleState('company', v) }}>公司名称 </InputItem>
-                <InputItem onChange={(v) => { this.handleState('title', v) }}>招聘岗位 </InputItem>
-                <InputItem onChange={(v) => { this.handleState('money', v) }}>薪资待遇 </InputItem>
+                <AvatarSelector selected={(v) => this.props.handleState('avatar', v)} />
+                <InputItem onChange={(v) => { this.props.handleState('company', v) }}>公司名称 </InputItem>
+                <InputItem onChange={(v) => { this.props.handleState('title', v) }}>招聘岗位 </InputItem>
+                <InputItem onChange={(v) => { this.props.handleState('money', v) }}>薪资待遇 </InputItem>
                 <TextareaItem
                     title='职位描述'
                     rows={3}
                     autoHeight
-                    onChange={(v) => { this.handleState('desc', v) }} />
+                    onChange={(v) => { this.props.handleState('desc', v) }} />
             </div>
         )
     }
 
-    handleState = (key, value) => {
-        this.setState({
-            [key]: value
-        })
-    }
-
     updateInfo = () => {
-        this.props.update(this.state)
+        this.props.update(this.props.state)
     }
 }
 

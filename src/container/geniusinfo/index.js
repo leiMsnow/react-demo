@@ -4,22 +4,14 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { update } from '../../redux/user.redux'
-import { AvatarSelector} from '../../component'
+import { AvatarSelector, WarpperState} from '../../component'
 
 @connect(
     state => state.user,
     { update }
 )
+@WarpperState
 class GeniusInfo extends React.Component{
-
-    constructor(props){
-        super(props)
-        this.state = {
-            title:'',
-            desc:'',
-            avatar:''
-        }
-    }
 
     render(){
         const { pathname } = this.props.location
@@ -34,25 +26,19 @@ class GeniusInfo extends React.Component{
                         ]
                     }
                 >GeniusInfo</NavBar>
-                <AvatarSelector selected={(v)=> this.handleState('avatar',v) }/>
-                <InputItem onChange={(v)=>{this.handleState('title',v)}}>求职岗位 </InputItem>
+                <AvatarSelector selected={(v)=> this.props.handleState('avatar',v) }/>
+                <InputItem onChange={(v)=>{this.props.handleState('title',v)}}>求职岗位 </InputItem>
                 <TextareaItem
                     title='简历描述'
                     rows={3}
                     autoHeight
-                    onChange={(v)=>{this.handleState('desc',v)}} />
+                    onChange={(v)=>{this.props.handleState('desc',v)}} />
             </div>
         )
     }
-
-    handleState=(key, value)=>{
-        this.setState({
-            [key]:value
-        })
-    }
-
+    
     updateInfo=()=>{
-        this.props.update(this.state)
+        this.props.update(this.props.state)
     }
 }
 

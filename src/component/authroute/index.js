@@ -33,9 +33,7 @@ class AuthRoute extends React.Component {
             if (this.props._id) {
                 this.props.history.push('/home')
             }
-            return
-        }
-        if (!this.props._id) {
+        } else if (!this.props._id) {
             this.props.history.push('/login')
         }
     }

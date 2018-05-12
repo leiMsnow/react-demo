@@ -15,7 +15,7 @@ Router.get('/list', (req, res)=>{
         return res.json({
             code:0,
             userList:data.filter((v)=>v.avatar)
-        }) 
+        })
     })
 })
 

@@ -54,13 +54,13 @@ class UserCenter extends React.Component {
     }
 
     logout = () => {
-        console.log('logout')
         Modal.alert('退出', '是否退出登录?', [
             { text: '取消', onPress: () => { console.log('cancel') } },
             {
                 text: '确定', onPress: () => {
                     cookies.erase('userId')
                     this.props.logout()
+                    this.props.history.push('/login')
                 }
             }
         ])

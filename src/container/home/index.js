@@ -26,22 +26,22 @@ class Home extends React.Component {
 
     render() {
         const { user } = this.props
-        const { pathname } = this.props.location
+        const pathname = this.props.location.pathname
         const navList = [
             {
                 path: '/genius',
-                text: 'Boss',
-                icon: 'job',
-                title: 'Boss列表',
                 component: Genius,
+                text: 'Boss',
+                icon: 'boss',
+                title: 'Boss列表',
                 hide: user.type === constant.userType.boss
             },
             {
                 path: '/boss',
-                text: '牛人',
-                icon: 'boss',
-                title: '牛人列表',
                 component: Boss,
+                text: 'Genius',
+                icon: 'job',
+                title: 'Genius列表',
                 hide: user.type === constant.userType.genius
             },
             {

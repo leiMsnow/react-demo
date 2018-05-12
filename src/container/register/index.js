@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { register } from '../../redux/user.redux'
 import { Redirect } from 'react-router-dom'
 
-import { Logo } from '../../component'
+import { WarpperState, Logo } from '../../component'
 import { constant } from '../../utils'
 @connect(
     state => state.user,
@@ -12,15 +12,12 @@ import { constant } from '../../utils'
         register
     }
 )
+@WarpperState
 class Register extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            user: '',
-            pwd: '',
-            type: 'boss'
-        }
+        this.props.handleState('type', constant.userType.boss)
     }
 
     render() {
@@ -31,16 +28,16 @@ class Register extends React.Component {
                 <Logo />
                 <WingBlank>
                     <List>
-                        <InputItem onChange={(v) => this.handleChange('user', v)}>帐号</InputItem>
+                        <InputItem onChange={(v) => this.props.handleState('user', v)}>帐号</InputItem>
                         <WhiteSpace />
-                        <InputItem type='password' onChange={(v) => this.handleChange('pwd', v)}>密码</InputItem>
-                        <RadioItem checked={this.state.type === constant.userType.boss}
-                            onChange={() => this.handleChange('type', constant.userType.genius)}
+                        <InputItem type='password' onChange={(v) => this.props.handleState('pwd', v)}>密码</InputItem>
+                        <RadioItem checked={this.props.state.type === constant.userType.genius}
+                            onChange={() => this.props.handleState('type', constant.userType.genius)}
                         >
                             天才
                         </RadioItem>
-                        <RadioItem checked={this.state.type === constant.userType.boss}
-                            onChange={() => this.handleChange('type', constant.userType.boss)}
+                        <RadioItem checked={this.props.state.type === constant.userType.boss}
+                            onChange={() => this.props.handleState('type', constant.userType.boss)}
                         >
                             Boss
                         </RadioItem>
@@ -52,15 +49,8 @@ class Register extends React.Component {
         )
     }
 
-    handleChange = (key, val) => {
-        this.setState({
-            [key]: val
-        })
-    }
-
     register = () => {
-        console.log(this.state)
-        this.props.register(this.state)
+        this.props.register(this.props.state)
     }
 }
 
