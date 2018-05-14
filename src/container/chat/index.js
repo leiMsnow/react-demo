@@ -1,11 +1,11 @@
 import React from 'react'
 import { List, InputItem, NavBar } from 'antd-mobile'
 import { connect } from 'react-redux'
-import { sendMessage } from '../../redux/chat.redux'
+import { sendMessage, getMessageList, receiveMessage } from '../../redux/chat.redux'
 
 @connect(
     state => state,
-    { sendMessage }
+    { sendMessage, getMessageList, receiveMessage }
 )
 class Chat extends React.Component {
 
@@ -17,6 +17,8 @@ class Chat extends React.Component {
     }
 
     componentDidMount() {
+        this.props.getMessageList()
+        this.props.receiveMessage()
     }
 
     render() {

@@ -8,6 +8,7 @@ const MSG_READ = 'MSG_READ'
 
 const initState = {
     chatMessage: [],
+    users: {},
     unread: 0
 }
 
@@ -16,8 +17,9 @@ export function chat(state = initState, action) {
         case MSG_LIST:
             return {
                 ...state,
-                chatMessage: action.payload,
-                unread: action.payload.filter(v => !v.read).length
+                chatMessage: action.payload.msg,
+                users: action.payload.users,
+                unread: action.payload.msg.filter(v => !v.read).length
             }
         case MSG_RECEIVE:
             return {
@@ -37,7 +39,9 @@ export function getMessageList() {
             if (res.status === 200 && res.data.code === 0) {
                 dispatch({
                     type: MSG_LIST,
-                    payload: res.data.msg
+                    payload: {
+                        ...res.data,
+                    }
                 })
             }
         })

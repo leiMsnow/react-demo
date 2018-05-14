@@ -108,13 +108,23 @@ Router.post('/update', (req, res) => {
 
 Router.get('/getMessageList', (req, res) => {
     // Chat.remove({}, (err, data) => { console.log('remvoe all chat message success') })
-    const user = req.cookies.user
-    const where = { '$or': [{ from: user, to: user }] }
-    Chat.find({}, _filter, (err, data) => {
+    let users = {}
+    User.find({}, (e, data) => {
+        data.filter(f => f.avatar).forEach(user => {
+            users[user._id] = {
+                name: user.user,
+                avatar: user.avatar
+            }
+        })
+    })
+    const { userId } = req.cookies
+    const where = { '$or': [{ from: userId }, { to: userId }] }
+    Chat.find(where, _filter, (err, data) => {
         if (!err) {
             return res.json({
                 code: 0,
-                msg: data
+                msg: data,
+                users: users
             })
         }
     })
