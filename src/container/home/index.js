@@ -10,10 +10,12 @@ import Boss from './boss'
 import Genius from './genius'
 import Message from './message'
 import UserCenter from './user'
+import { getMessageList, receiveMessage } from '../../redux/chat.redux'
 
 @withRouter
 @connect(
-    state => state
+    state => state,
+    { getMessageList, receiveMessage }
 )
 class Home extends React.Component {
 
@@ -22,6 +24,11 @@ class Home extends React.Component {
         this.state = {
             title: ''
         }
+    }
+
+    componentDidMount() {
+        this.props.getMessageList()
+        this.props.receiveMessage()
     }
 
     render() {
