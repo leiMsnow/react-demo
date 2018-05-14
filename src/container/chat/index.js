@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, InputItem, NavBar } from 'antd-mobile'
+import { List, InputItem, NavBar, Icon } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { sendMessage, getMessageList, receiveMessage } from '../../redux/chat.redux'
 
@@ -17,27 +17,38 @@ class Chat extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getMessageList()
-        this.props.receiveMessage()
+        if (!this.props.chat.chatMessage.length) {
+            this.props.getMessageList()
+            this.props.receiveMessage()
+        }
     }
 
     render() {
-        const user = this.props.match.params.user
+        const userId = this.props.match.params.user
+        const { users } = this.props.chat
+        if (!users[userId]) {
+            return null
+        }
         return (
             <div id='chat-page'>
-                <NavBar>{user}</NavBar>
+                <NavBar
+                    icon={<Icon type='left' />}
+                    onLeftClick={() => this.props.history.goBack()}
+                >{users[userId].name}</NavBar>
                 <div className='stick-footer'>
                     {
                         this.props.chat.chatMessage.map(message => {
-                            return message.from === user ? (
+                            return message.from === userId ? (
                                 <List key={message._id}>
-                                    <List.Item>
+                                    <List.Item
+                                        thumb={require(`../../component/avatar-selector/images/${users[userId].avatar}.png`)}
+                                    >
                                         {message.content}
                                     </List.Item>
                                 </List>
                             ) : (
                                     <List key={message._id} className='chat-me'>
-                                        <List.Item >
+                                        <List.Item extra={<img alt='' src={require(`../../component/avatar-selector/images/${this.props.user.avatar}.png`)} />}>
                                             {message.content}
                                         </List.Item>
                                     </List>

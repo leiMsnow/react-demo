@@ -2,12 +2,8 @@ import React from 'react'
 import { TabBar } from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 
 @withRouter
-@connect(
-    state => state
-)
 export default class Tabbar extends React.Component {
 
     render() {
@@ -19,7 +15,7 @@ export default class Tabbar extends React.Component {
                     navList.map(v => (
                         <TabBar.Item
                             key={v.path}
-                            badge={v.path === '/message' ? this.props.chat.unread : 0}
+                            badge={v.unread}
                             title={v.text}
                             icon={{ uri: require(`./images/${v.icon}.png`) }}
                             selectedIcon={{ uri: require(`./images/${v.icon}-active.png`) }}

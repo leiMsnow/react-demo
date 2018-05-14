@@ -1,9 +1,8 @@
 import React from 'react'
-import { NavBar } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { Switch, Route, withRouter } from 'react-router-dom'
 
-import { Tabbar } from '../../component'
+import { Navbar, Tabbar } from '../../component'
 import { constant } from '../../utils'
 
 import Boss from './boss'
@@ -19,13 +18,6 @@ import { getMessageList, receiveMessage } from '../../redux/chat.redux'
 )
 class Home extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            title: ''
-        }
-    }
-
     componentDidMount() {
         this.props.getMessageList()
         this.props.receiveMessage()
@@ -34,6 +26,7 @@ class Home extends React.Component {
     render() {
         const { user } = this.props
         const pathname = this.props.location.pathname
+        const { unread } = this.props.chat
         const navList = [
             {
                 path: '/genius',
@@ -56,6 +49,7 @@ class Home extends React.Component {
                 text: '消息',
                 icon: 'message',
                 title: '消息列表',
+                unread,
                 component: Message,
                 hide: false
             },
@@ -73,7 +67,7 @@ class Home extends React.Component {
 
         return (
             <div>
-                <NavBar mode='dark'>{navItem ? navItem.title : ''}</NavBar>
+                <Navbar title={navItem ? navItem.title : ''} hideBack />
                 <div>
                     <Switch>
                         {
