@@ -11,7 +11,7 @@ export default class Navbar extends React.Component {
         return (
             <NavBar
                 icon={this.renderIcon()}
-                onLeftClick={this.onLeftClick()}
+                onLeftClick={() => this.onLeftClick()}
             >
                 {title}
             </NavBar>

@@ -1,7 +1,9 @@
 import React from 'react'
-import { List, InputItem, NavBar, Icon } from 'antd-mobile'
+import { List, InputItem } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { sendMessage, getMessageList, receiveMessage } from '../../redux/chat.redux'
+
+import { Navbar } from '../../component'
 
 @connect(
     state => state,
@@ -31,10 +33,7 @@ class Chat extends React.Component {
         }
         return (
             <div id='chat-page'>
-                <NavBar
-                    icon={<Icon type='left' />}
-                    onLeftClick={() => this.props.history.goBack()}
-                >{users[userId].name}</NavBar>
+                <Navbar title={users[userId].name} />
                 <div className='stick-footer'>
                     {
                         this.props.chat.chatMessage.map(message => {
@@ -66,7 +65,7 @@ class Chat extends React.Component {
                         />
                     </List>
                 </div>
-            </div>
+            </div >
         )
     }
 
