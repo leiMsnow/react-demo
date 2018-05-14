@@ -6,7 +6,7 @@ import { Grid, List } from 'antd-mobile'
 const avatars = 'boy,bull,chick,crab,girl,hedgehog,hippopotamus,koala,lemur,man,pig,tiger,whale,woman,zebra'
                 .split(',')
                 .map(v=>({
-                    icon:require(`./images/${v}.png`),
+                    icon:require(`../../images/avatars/${v}.png`),
                     text:v
                 }))
 

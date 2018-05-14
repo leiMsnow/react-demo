@@ -20,7 +20,7 @@ export default class UserList extends React.Component {
                                 <Card.Header
                                     title={v.user}
                                     extra={(v.type === constant.userType.boss ? '招聘: ' : '') + v.title}
-                                    thumb={require(`../avatar-selector/images/${v.avatar}.png`)}
+                                    thumb={require(`../../images/avatars/${v.avatar}.png`)}
                                 />
                                 <Card.Body>
                                     {v.desc.split('\n').map(sv => (

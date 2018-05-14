@@ -40,14 +40,14 @@ class Chat extends React.Component {
                             return message.from === userId ? (
                                 <List key={message._id}>
                                     <List.Item
-                                        thumb={require(`../../component/avatar-selector/images/${users[userId].avatar}.png`)}
+                                        thumb={require(`../../images/avatars/${users[userId].avatar}.png`)}
                                     >
                                         {message.content}
                                     </List.Item>
                                 </List>
                             ) : (
                                     <List key={message._id} className='chat-me'>
-                                        <List.Item extra={<img alt='' src={require(`../../component/avatar-selector/images/${this.props.user.avatar}.png`)} />}>
+                                        <List.Item extra={<img alt='' src={require(`../../images/avatars/${this.props.user.avatar}.png`)} />}>
                                             {message.content}
                                         </List.Item>
                                     </List>

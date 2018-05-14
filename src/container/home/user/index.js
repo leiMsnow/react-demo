@@ -17,7 +17,7 @@ class UserCenter extends React.Component {
         return user.avatar ? (
             <div>
                 <Result
-                    img={<img alt='' src={require(`../../../component/avatar-selector/images/${user.avatar}.png`)} style={{ width: 50 }} />}
+                    img={<img alt='' src={require(`../../../images/avatars/${user.avatar}.png`)} style={{ width: 50 }} />}
                     title={user.user}
                     message={user.company}
                 />
