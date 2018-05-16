@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { sendMessage, getMessageList, receiveMessage } from '../../redux/chat.redux'
 
 import { Navbar } from '../../component'
+import { getChatId } from '../../utils';
 
 @connect(
     state => state,
@@ -31,12 +32,14 @@ class Chat extends React.Component {
         if (!users[userId]) {
             return null
         }
+        const chatId = getChatId(userId, this.props.user._id)
+        const chatMessage = this.props.chat.chatMessage.filter(m => m.chat_id === chatId)
         return (
             <div id='chat-page'>
                 <Navbar title={users[userId].name} />
                 <div className='stick-footer'>
                     {
-                        this.props.chat.chatMessage.map(message => {
+                        chatMessage.map(message => {
                             return message.from === userId ? (
                                 <List key={message._id}>
                                     <List.Item

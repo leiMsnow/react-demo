@@ -19,8 +19,10 @@ import { getMessageList, receiveMessage } from '../../redux/chat.redux'
 class Home extends React.Component {
 
     componentDidMount() {
-        this.props.getMessageList()
-        this.props.receiveMessage()
+        if (!this.props.chat.chatMessage.length) {
+            this.props.getMessageList()
+            this.props.receiveMessage()
+        }
     }
 
     render() {

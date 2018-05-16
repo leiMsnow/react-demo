@@ -9,7 +9,7 @@ const MSG_READ = 'MSG_READ'
 const initState = {
     chatMessage: [],
     users: {},
-    unread: 0
+    unread: 0,
 }
 
 export function chat(state = initState, action) {
@@ -19,13 +19,13 @@ export function chat(state = initState, action) {
                 ...state,
                 chatMessage: action.payload.msg,
                 users: action.payload.users,
-                unread: action.payload.msg.filter(v => !v.read).length
+                unread: action.payload.msg.filter(v => !v.read && v.to === action.payload.userId).length
             }
         case MSG_RECEIVE:
             return {
                 ...state,
-                chatMessage: [...state.chatMessage, action.payload],
-                unread: state.unread + 1
+                chatMessage: [...state.chatMessage, action.payload.data],
+                unread: state.unread + (action.payload.data.to === action.payload.userId ? 1 : 0)
             }
         case MSG_READ:
         default:
@@ -34,13 +34,16 @@ export function chat(state = initState, action) {
 }
 
 export function getMessageList() {
-    return dispatch => {
+    return (dispatch, getState) => {
         axios.get('/user/getMessageList').then(res => {
             if (res.status === 200 && res.data.code === 0) {
+                const userId = getState().user._id
+                console.log('get state', getState())
                 dispatch({
                     type: MSG_LIST,
                     payload: {
                         ...res.data,
+                        userId
                     }
                 })
             }
@@ -55,12 +58,16 @@ export function sendMessage(data) {
 }
 
 export function receiveMessage() {
-    return dispatch => {
+    return (dispatch, getState) => {
         socket.on('receiveMessage', (data) => {
             console.log('receiveMessage', data)
+            const userId = getState().user._id
             dispatch({
                 type: MSG_RECEIVE,
-                payload: data
+                payload: {
+                    data,
+                    userId
+                }
             })
         })
     }
