@@ -38,7 +38,6 @@ export function getMessageList() {
         axios.get('/user/getMessageList').then(res => {
             if (res.status === 200 && res.data.code === 0) {
                 const userId = getState().user._id
-                console.log('get state', getState())
                 dispatch({
                     type: MSG_LIST,
                     payload: {
@@ -60,7 +59,6 @@ export function sendMessage(data) {
 export function receiveMessage() {
     return (dispatch, getState) => {
         socket.on('receiveMessage', (data) => {
-            console.log('receiveMessage', data)
             const userId = getState().user._id
             dispatch({
                 type: MSG_RECEIVE,

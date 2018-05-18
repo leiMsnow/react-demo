@@ -1,3 +1,3 @@
 export { getRedirectPath } from './redirect'
-export { getChatId } from './chat'
+export { getChatId, getLastChat } from './chat'
 export { default as constant } from './constant'
