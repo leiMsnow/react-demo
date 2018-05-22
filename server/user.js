@@ -109,7 +109,7 @@ Router.post('/update', (req, res) => {
 Router.get('/getMessageList', (req, res) => {
     // Chat.remove({}, (err, data) => { console.log('remvoe all chat message success') })
     let users = {}
-    User.find({}, (e, data) => {
+    User.find({}, (err, data) => {
         data.filter(f => f.avatar).forEach(user => {
             users[user._id] = {
                 name: user.user,
@@ -128,6 +128,30 @@ Router.get('/getMessageList', (req, res) => {
             })
         }
     })
+})
+
+Router.post('/readMessage', (req, res) => {
+    const { userId } = req.cookies
+    const { chatUserId } = req.body
+    console.log('myUserId', userId)
+    console.log('chatUserId', chatUserId)
+    Chat.update(
+        { from: chatUserId, to: userId },
+        { '$set': { read: true } },
+        { 'multi': true },
+        (err, data) => {
+            if (err) {
+                return res.json({
+                    code: 1,
+                    msg: '修改失败'
+                })
+            }
+            console.log(data)
+            return res.json({
+                code: 0,
+                num: data.nModified
+            })
+        })
 })
 
 md5Pwd = (pwd) => {

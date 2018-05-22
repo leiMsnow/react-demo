@@ -12,6 +12,7 @@ const initState = {
 	redirectTo: '',
 	msg: '',
 	user: '',
+	_id: '',
 	type: '',
 	userList: [],
 }

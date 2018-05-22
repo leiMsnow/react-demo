@@ -22,6 +22,7 @@ io.on('connection', (socket) => {
             from,
             to,
             content,
+            create_time:new Date().getTime()
         }, (err, data) => {
             io.emit('receiveMessage', Object.assign({}, data._doc))
         })
